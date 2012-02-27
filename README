@@ -1,0 +1,37 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3952
+
+A simple utility improve the "{" and "}" motion in normal / visual mode.
+In vim, a blank line only containing white space is NOT a paragraph
+boundary, this utility remap the key "{" and "}" to handle that.
+
+It supports in normal and visual mode, and able to handle with count. It
+also support redefine the regexp for boundary, or local definition of
+boundary.
+
+The utility uses a custom regexp to define paragraph boundaries, the
+matched line will be treated as paragraph boundary.
+Note that the regexp will be enforced to match from the start of line, to
+avoid strange behaviour when moving.
+
+Configuration Variables:
+g:ip_skipfold     Set as 1 will make the "{" and "}" motion skip paragraph
+                  boundaries in closed fold.
+                  Default is 0.
+
+g:ip_boundary     The global definition of paragraph boundary.
+                  Default value is "\s*$".
+                  It can be changed in .vimrc or anytime. Defining
+                  b:ip_boundary will override this setting.
+
+                  Example:
+                      :let g:ip_boundary = '"\?\s*$'
+                  Setting that will make empty lines, and lines only
+                  contains '"' as boundaries.
+
+                  Note that there is no need adding a "^" sign at the
+                  beginning. It is enforced by the script.
+
+b:ip_boundary     Local definition of paragraph boundary. It will override
+                  g:ip_boundary if set. Useful when customize boundary for
+                  local buffer or only apply to particular file type.
+                  Default is unset.
